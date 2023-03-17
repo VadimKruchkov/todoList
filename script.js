@@ -23,22 +23,23 @@ addButton.addEventListener("click", function () {
 
 function displayMessages() {
   let displayMessage = "";
-  if (todoList.length === 0) todo.innerHTML = "";
+  // if (todoList.length === 0) todo.innerHTML = "";
   todoList.forEach(function (item, i) {
     displayMessage += `
    <li class='todo_item' >
    <input type='checkbox' id='item_${i}' ${item.checked ? "checked" : ""}>
-   <label for='item_${i}' class='${item.importent ? "important" : ""}'>
+   <label for='item_${i}' class='${item.important ? "important" : ""}'>
    ${item.todo}</label>
    </li>
    `;
     todo.innerHTML = displayMessage;
   });
 }
+
 todo.addEventListener("change", function (e) {
-  let valueLabel = todo.querySelector(
-    "[for = " + e.target.getAttribute("id") + "]"
-  ).innerHTML;
+  let idInput = e.target.getAttribute("id");
+  let forLabel = todo.querySelector("[for = " + idInput + "]");
+  let valueLabel = forLabel.innerHTML;
   todoList.forEach(function (item) {
     if (item.todo === valueLabel) {
       item.checked = !item.checked;
